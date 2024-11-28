@@ -9,7 +9,7 @@ class Program
         string enter;
         bool cycle = true;
         string stop = "stop";
-        string path = @"D:\\C# darslar\\34-dars\\Expense.txt";
+        string path = @"D:\C# darslar\34-dars\Expense\Expense.txt";
         if (!File.Exists(path))
         {
             File.Create(path).Close();
