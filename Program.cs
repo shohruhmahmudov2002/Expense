@@ -9,7 +9,7 @@ class Program
         string enter;
         bool cycle = true;
         string stop = "stop";
-        string path = "D:\\C# darslar\\34-dars\\Expense";
+        string path = @"D:\\C# darslar\\34-dars\\Expense.txt";
         if (!File.Exists(path))
         {
             File.Create(path).Close();
@@ -25,20 +25,23 @@ class Program
             System.Console.Write("Date: ");
             expenseClass.time = TimeOnly.Parse(Console.ReadLine());
             listOfExpenses.Add(expenseClass);
-        here:
-            System.Console.WriteLine("Hit enter to add expense...");
-            enter = Console.ReadLine();
-            if (Regex.IsMatch(enter, stop, RegexOptions.IgnoreCase))
+            do
             {
-                Files.WriteFile(path, listOfExpenses);
-                break;
-            }
-            else if (!string.IsNullOrWhiteSpace(enter))
-            {
-                System.Console.WriteLine("Only enter or stop commands can be accepted");
-                goto here;
-            }
-        } while (string.IsNullOrWhiteSpace(enter));
+                
+                System.Console.WriteLine("Hit enter to add expense...");
+                enter = Console.ReadLine();
+                if (Regex.IsMatch(enter, stop, RegexOptions.IgnoreCase))
+                {
+                    Files.WriteFile(path, listOfExpenses);
+                    cycle = false;
+                    break;
+                }
+                else if (!string.IsNullOrWhiteSpace(enter))
+                {
+                    System.Console.WriteLine("Only enter or stop commands can be accepted");
+                }
+            } while (!string.IsNullOrWhiteSpace(enter));
+        } while (cycle);
 
     }
 }
